@@ -1,170 +1,343 @@
+/* ==========================================================================
+   1. RESET & VARIABLES (PALET WARNA KAMPUS & EMAS)
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --primary-deep: #5a0606; /* Merah Darah Gelap */
+  --primary-crimson: #8b0000; /* Merah Darah Utama (Crimson) */
+  --accent-gold: #f1c40f; /* Kuning Emas Cerah */
+  --accent-gold-dark: #c59b27; /* Emas Mewah Terbakar */
+  --white-clean: #ffffff;
+  --text-dark: #2c1a1a; /* Teks Gelap dengan hint merah mading */
+  --text-muted: #7d6666;
+}
+
+/* ==========================================================================
+   2. BODY & BACKGROUND ART
+   ========================================================================== */
 body {
   font-family: "Poppins", sans-serif;
-
+  color: var(--text-dark);
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow-x: hidden;
 
-  padding: 20px;
-
-  background: linear-gradient(135deg, #667eea, #764ba2);
-
-  overflow: hidden;
+  /* Latar belakang mewah dengan gradasi dan semburat cahaya almamater */
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(139, 0, 0, 0.06) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(241, 196, 15, 0.08) 0%,
+      transparent 40%
+    ),
+    linear-gradient(135deg, #f9f6f6 0%, #f2eae2 50%, #ebdada 100%);
 }
 
-header {
+/* Ornamen Seni Abstrak di Background */
+body::before,
+body::after {
+  content: "";
   position: absolute;
-  top: 35px;
+  width: 320px;
+  height: 320px;
+  border-radius: 40% 60% 65% 35% / 40% 45% 55% 60%;
+  filter: blur(90px);
+  z-index: -1;
+  opacity: 0.5;
+}
+body::before {
+  top: -40px;
+  left: -40px;
+  background: var(--primary-crimson);
+}
+body::after {
+  bottom: -40px;
+  right: -40px;
+  background: var(--accent-gold);
+}
+
+/* ==========================================================================
+   3. RESPONSIVE HEADER
+   ========================================================================== */
+header {
   text-align: center;
-  color: white;
+  margin-bottom: 2.5rem;
+  animation: fadeInDown 0.8s ease-out;
 }
 
 header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 8px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--primary-deep);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.2;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
 }
 
-header p {
-  opacity: 0.8;
+/* Simbol Ornamen Tengah di bawah Header */
+header::after {
+  content: "✦";
+  display: block;
+  font-size: 1.2rem;
+  color: var(--accent-gold-dark);
+  margin-top: 0.5rem;
+  letter-spacing: 10px;
 }
 
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
+/* ==========================================================================
+   4. GLASSMORPHISM CARD CONTAINER (UKURAN LEBIH LEBAR & LEGA)
+   ========================================================================== */
 .card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   width: 100%;
-  max-width: 600px;
+  max-width: 680px; /* Diperlebar dari 600px agar bidang ketik lebih luas */
+  padding: clamp(
+    2rem,
+    6vw,
+    4rem
+  ); /* Padding dinamis, makin lebar di layar besar */
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.02),
+    0 20px 50px rgba(90, 6, 6, 0.1);
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
 
-  padding: 30px;
-
-  border-radius: 25px;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  backdrop-filter: blur(15px);
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-
-  color: white;
+/* Garis bingkai aksen emas murni di bagian atas kartu */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-gold),
+    transparent
+  );
+  border-radius: 0 0 4px 4px;
 }
 
 .card h2 {
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem); /* Ukuran judul disesuaikan */
+  font-weight: 600;
+  color: var(--primary-crimson);
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.5px;
 }
 
-form {
+/* ==========================================================================
+   5. INTERACTIVE FORM ELEMENTS (FOKUS KETERBACAAN MAXIMAL)
+   ========================================================================== */
+#contact-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-}
-
-label {
-  font-weight: bold;
+  gap: 1.8rem; /* Jarak antar input sedikit diperlebar agar tidak berdempetan */
 }
 
 select,
 textarea {
   width: 100%;
-
-  padding: 14px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  color: white;
-
+  padding: 1.2rem 1.4rem; /* Padding input dipertebal agar nyaman ditekan di HP */
+  font-family: "Poppins", sans-serif;
+  /* Menggunakan clamp agar teks otomatis berukuran pas di HP (~16px) dan desktop (~17px) */
+  font-size: clamp(1rem, 2.5vw, 1.05rem);
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(139, 0, 0, 0.15);
+  border-radius: 14px; /* Sudut lengkungan dibuat sedikit lebih halus */
+  color: var(--text-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
-
-  font-size: 15px;
+  line-height: 1.6;
 }
 
+/* Dropdown Kustom dengan Icon Emas */
 select {
-  width: 100%;
-  padding: 14px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  color: rgba(255, 255, 255, 0.7);
-
-  outline: none;
-
-  font-size: 15px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23c59b27' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.4rem center;
+  background-size: 1.2rem;
+  padding-right: 4rem;
   cursor: pointer;
-}
-
-select:hover {
-  background: rgba(255, 255, 255, 0.103);
-}
-
-select option {
-  color: black;
-  background: white;
 }
 
 textarea {
-  min-height: 120px;
-  resize: none;
+  resize: vertical;
+  min-height: 140px; /* Tinggi minimal area ketik ditambah agar leluasa bercerita */
 }
 
-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+::placeholder {
+  color: var(--text-muted);
+  opacity: 0.75;
 }
 
-button {
-  padding: 14px;
+/* Efek Elemen Saat Fokus/Dipilih */
+select:focus,
+textarea:focus {
+  border-color: var(--accent-gold-dark);
+  background: var(--white-clean);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(139, 0, 0, 0.05),
+    0 0 0 4px rgba(241, 196, 15, 0.2);
+}
 
-  border: none;
+/* ==========================================================================
+   6. PREMIUM CREATIVE BUTTON (MERAH DARAH & GLOW EMAS)
+   ========================================================================== */
+button[type="submit"] {
+  background: linear-gradient(
+    135deg,
+    var(--primary-crimson) 0%,
+    var(--primary-deep) 100%
+  );
+  color: var(--white-clean);
+  border: 1px solid rgba(241, 196, 15, 0.3);
+  padding: 1.1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   border-radius: 12px;
-
-  background: white;
-  color: #5b52c9;
-
-  font-weight: bold;
-  font-size: 16px;
-
   cursor: pointer;
-
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(90, 6, 6, 0.25);
+  margin-top: 0.5rem;
 }
 
-button:hover {
+/* Efek Kilau Sapuan Cahaya Emas saat Hover */
+button[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(241, 196, 15, 0.3),
+    transparent
+  );
+  transition: all 0.6s ease;
+}
+
+button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--primary-deep) 0%, #3a0303 100%);
+  border-color: var(--accent-gold);
+  box-shadow: 0 12px 30px rgba(90, 6, 6, 0.4);
   transform: translateY(-3px);
-
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-#form-status {
+button[type="submit"]:active {
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   7. STATUS FORM RESPONSIVE
+   ========================================================================== */
+#form-status:not(:empty) {
+  padding: 1rem;
+  border-radius: 10px;
   text-align: center;
-  margin-top: 10px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  animation: fadeIn 0.5s ease;
+  background: rgba(139, 0, 0, 0.05);
+  color: var(--primary-deep);
+  border: 1px solid rgba(139, 0, 0, 0.15);
 }
 
-/* HP */
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.7rem;
+/* ==========================================================================
+   8. ANIMATIONS HARDCODED
+   ========================================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   9. EXTRA RESPONSIVE BREAKPOINTS (MEDIA QUERIES DIOPTIMALKAN)
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem 1rem;
+  }
   .card {
-    padding: 20px;
+    border-radius: 20px;
+    padding: 2.5rem 1.8rem; /* Padding disesuaikan agar tidak memakan ruang layar HP */
+  }
+}
+
+@media (max-width: 420px) {
+  .card {
+    padding: 2rem 1.25rem; /* Form tetap lebar maksimal mendekati tepi layar HP */
+    border-radius: 16px;
+  }
+  select,
+  textarea {
+    padding: 1.1rem 1.2rem; /* Menjaga area sentuh (hit target) tetap besar */
+  }
+  button[type="submit"] {
+    padding: 1.1rem;
+    font-size: 0.95rem;
   }
 }
