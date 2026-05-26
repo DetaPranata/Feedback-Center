@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title>Feedback Center</title>
+    <title>Forum Komunikasi Internal</title>
     <link rel="stylesheet" href="CSS/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +14,13 @@
 
   <body>
     <header>
-      <h1>Feedback Center</h1>
+      <h1>Forum Komunikasi Internal</h1>
       <p></p>
     </header>
 
     <main>
       <section class="card">
-        <h2>Share Your Feedback</h2>
+        <h2>Ada Apa Hari Ini?</h2>
 
         <form id="contact-form">
           <select name="fi-text-kategori" required>
@@ -30,21 +30,25 @@
             <option value="Pelayanan">Pelayanan</option>
           </select>
 
-          <textarea
-            name="fi-text-kritik"
-            placeholder="Tulis kritik..."
-            required
-          ></textarea>
+          <select name="fi-text-tujuan" required>
+            <option value="">Pilih tujuan</option>
+            <option value="Kinerja">Rektorat</option>
+            <option value="Fasilitas">FDS</option>
+            <option value="Pelayanan">FDD</option>
+            <option value="Pelayanan">FDA</option>
+            <option value="Pelayanan">FBW</option>
+            <option value="Pelayanan">Pascasarjana</option>
+          </select>
 
           <textarea
-            name="fi-text-saran"
-            placeholder="Tulis saran..."
+            name="fi-text-kritik"
+            placeholder="Tulis kritik atau saran..."
             required
           ></textarea>
 
           <input type="hidden" name="fi-text-pengirim" value="Anonim" />
 
-          <button type="submit">Send</button>
+          <button type="submit">Kirim</button>
 
           <p id="form-status"></p>
         </form>
