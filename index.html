@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Feedback Center</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rancho&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <h1>Feedback Center</h1>
+      <p></p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Share Your Feedback</h2>
+
+        <form id="contact-form">
+          <select name="fi-text-kategori" required>
+            <option value="">Pilih kategori</option>
+            <option value="Kinerja">Kinerja</option>
+            <option value="Fasilitas">Fasilitas</option>
+            <option value="Pelayanan">Pelayanan</option>
+          </select>
+
+          <textarea
+            name="fi-text-kritik"
+            placeholder="Tulis kritik..."
+            required
+          ></textarea>
+
+          <textarea
+            name="fi-text-saran"
+            placeholder="Tulis saran..."
+            required
+          ></textarea>
+
+          <input type="hidden" name="fi-text-pengirim" value="Anonim" />
+
+          <button type="submit">Send</button>
+
+          <p id="form-status"></p>
+        </form>
+      </section>
+    </main>
+
+    <!-- Include Forminit SDK -->
+    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+
+    <script>
+      const forminit = new Forminit();
+      const FORM_ID = "iue56ed9ut1";
+
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(e.target);
+          const { data, error } = await forminit.submit(FORM_ID, formData);
+
+          const status = document.getElementById("form-status");
+
+          if (error) {
+            status.textContent = error.message;
+            return;
+          }
+
+          status.textContent = "Message sent successfully!";
+          e.target.reset();
+        });
+    </script>
+  </body>
+</html>
